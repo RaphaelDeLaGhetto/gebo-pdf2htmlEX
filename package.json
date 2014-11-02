@@ -28,6 +28,7 @@
     "test": "grunt nodeunit"
   },
   "dependencies": {
+    "fs-extra": "^0.12.0",
     "gebo-utils": "*",
     "nconf": "*",
     "q": "*",
