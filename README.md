@@ -105,6 +105,15 @@ sudo make install
 grunt nodeunit
 ```
 
+# Enable gebo
+
+Do this wherever you have an available `gebo` module:
+
+```
+var gebo = require('gebo-server')(testing);
+gebo.enable('pdf2htmlex', require('gebo-pdf2htmlex'))
+```
+
 ## License
 
-MIT license.
+MIT
