@@ -29,7 +29,7 @@ exports.convert = {
               test.ok(false, err);
             }
             try {
-              fse.openSync('/tmp/pdf.html.pid', 'r');
+              fse.openSync('/tmp/my.html.pid', 'r');
               test.ok(true);
             }
             catch(err) {
