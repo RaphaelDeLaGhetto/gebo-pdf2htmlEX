@@ -1,23 +1,23 @@
 {
-  "name": "gebo-pdf2htmlex",
+  "name": "gebo-pdf2htmlex-action",
   "description": "A pdf2htmlEX-dependent PDF converter",
   "version": "0.0.0",
-  "homepage": "https://github.com/RaphaelDeLaGhetto/gebo-pdf2htmlex",
+  "homepage": "https://github.com/RaphaelDeLaGhetto/gebo-pdf2htmlex-action",
   "author": {
     "name": "RaphaelDeLaGhetto",
     "email": "daniel@capitolhill.ca"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/RaphaelDeLaGhetto/gebo-pdf2htmlex.git"
+    "url": "https://github.com/RaphaelDeLaGhetto/gebo-pdf2htmlex-action.git"
   },
   "bugs": {
-    "url": "https://github.com/RaphaelDeLaGhetto/gebo-pdf2htmlex/issues"
+    "url": "https://github.com/RaphaelDeLaGhetto/gebo-pdf2htmlex-action/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/RaphaelDeLaGhetto/gebo-pdf2htmlex/blob/master/LICENSE-MIT"
+      "url": "https://github.com/RaphaelDeLaGhetto/gebo-pdf2htmlex-action/blob/master/LICENSE-MIT"
     }
   ],
   "main": "index.js",
