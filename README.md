@@ -1,5 +1,5 @@
-gebo-pdf2htmlEX
-================
+gebo-pdf2htmlex
+===============
 
 A pdf2htmlEX-dependent PDF converter
 

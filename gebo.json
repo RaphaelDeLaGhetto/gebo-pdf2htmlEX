@@ -1,13 +1,13 @@
 {
-    "name":"gebo-pdf2htmlEX",
-    "email":"gebo-pdf2htmlEX@example.com",
+    "name":"gebo-pdf2htmlex",
+    "email":"gebo-pdf2htmlex@example.com",
     "domain":"https://localhost",
     "port":3000,
     "httpsPort":3443,
     "docs": "docs",
-    "testEmail": "gebo-pdf2htmlEX-test@example.com",
+    "testEmail": "gebo-pdf2htmlex-test@example.com",
     "logLevel": "trace",
-    "pdf2htmlEX": {
+    "pdf2htmlex": {
         "timeout": 60000
     }
 }
