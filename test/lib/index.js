@@ -10,11 +10,13 @@ exports.convert = {
 
     setUp: function(callback) {
         fse.createReadStream('./test/docs/pdf.pdf').pipe(fse.createWriteStream('/tmp/pdf.pdf'));
+        fse.createReadStream('./test/docs/pdf.pdf').pipe(fse.createWriteStream('/tmp/My Inconveniently named PDF.pdf'));
         callback();
     },
 
     tearDown: function(callback) {
         fse.unlinkSync('/tmp/pdf.pdf');
+        fse.unlinkSync('/tmp/My Inconveniently named PDF.pdf');
         fse.removeSync('/tmp/gebo-pdf2htmlEx');
         callback();
     },
@@ -66,6 +68,24 @@ exports.convert = {
               test.ok(false, err);
             }
             test.equal(path, '/tmp/gebo-pdf2htmlEX/my.html');
+            try {
+              fse.closeSync(fse.openSync(path, 'r'));
+              test.ok(true);
+            }
+            catch (err) {
+              test.ok(false, err);
+            }
+            test.done();
+          });
+    },
+
+    'Convert a PDF with spaces in the filename to HTML': function(test) {
+        test.expect(2);
+        doc.convert('/tmp/My Inconveniently named PDF.pdf', '/tmp/gebo-pdf2htmlEX', 'My Inconveniently named PDF.html',function(err, path) {
+            if (err) {
+              test.ok(false, err);
+            }
+            test.equal(path, '/tmp/gebo-pdf2htmlEX/My Inconveniently named PDF.html');
             try {
               fse.closeSync(fse.openSync(path, 'r'));
               test.ok(true);
