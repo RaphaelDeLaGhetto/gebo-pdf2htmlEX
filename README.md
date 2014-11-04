@@ -84,7 +84,7 @@ cd code
 make
 sudo make install
 cd ..
-cd ./fontforge-20120731-b/
+#?cd ./fontforge-20120731-b/
 ./configure
 make
 sudo make install
