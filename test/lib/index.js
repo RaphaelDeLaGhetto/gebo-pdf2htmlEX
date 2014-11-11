@@ -42,24 +42,18 @@ exports.convert = {
     },
 
     // How do I test this?
-//    'Kill the pdf2htmlEX process if it executes longer than allowed': function(test) {
-//        test.expect(2);
-//        doc.convert('./test/docs/pdf.pdf', function(err, path) {
-//            if (err) {
-//              test.ok(false, err);
-//            }
-//            try {
-//              fse.openSync('/tmp/pdf.html.pid', 'r');         
-//              test.ok(true);
-//              fse.openSync(path, 'r');         
-//              test.ok(false, 'The file at the returned path shouldn\'t exist');
-//            }
-//            catch(err) {
-//              test.ok(true);
-//            }
-//            test.done();
-//          });
-//    },
+    'Kill the pdf2htmlEX process if it executes longer than allowed': function(test) {
+        test.expect(1);
+        doc.convert('/tmp/pdf.pdf', '/tmp/gebo-pdf2htmlEX', 'my.html', { timeLimit: 50 }, function(err, path) {
+            if (err) {
+              test.equal(err, 'Sorry, that file took too long to process');
+            }
+            else {
+              test.ok(false, 'This should have returned an error');
+            }
+            test.done();
+          });
+    },
 
     'Convert a PDF to HTML': function(test) {
         test.expect(2);

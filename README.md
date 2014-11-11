@@ -114,18 +114,6 @@ var gebo = require('gebo-server')(testing);
 gebo.enable('pdf2htmlex', require('gebo-pdf2htmlex-action'));
 ```
 
-Configure `gebo.json`:
-
-```
-{
-    ...
-    "pdf2htmlex": {
-        "timeout": 60000
-    },
-    ...
-}
-```
-
 ## License
 
 MIT

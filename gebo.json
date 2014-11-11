@@ -6,8 +6,5 @@
     "httpsPort":3443,
     "docs": "docs",
     "testEmail": "gebo-pdf2htmlex-test@example.com",
-    "logLevel": "trace",
-    "pdf2htmlex": {
-        "timeout": 60000
-    }
+    "logLevel": "trace"
 }
