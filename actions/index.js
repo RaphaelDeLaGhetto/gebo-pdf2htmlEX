@@ -33,7 +33,7 @@ module.exports = function() {
           // Respect the original file name
           var filename = utils.getOutputFileName(message.file.originalname, 'html');
 
-          doc.convert(message.file.path, destDir, filename, function(err, path) {
+          doc.convert(message.file.path, destDir, filename, message.content, function(err, path) {
                 if (err) {
                   if (logLevel === 'trace') logger.error('gebo-pdf2htmlEX:', err);
                   deferred.resolve({ error: err });

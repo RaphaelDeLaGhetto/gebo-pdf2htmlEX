@@ -41,7 +41,6 @@ exports.convert = {
           });
     },
 
-    // How do I test this?
     'Kill the pdf2htmlEX process if it executes longer than allowed': function(test) {
         test.expect(1);
         doc.convert('/tmp/pdf.pdf', '/tmp/gebo-pdf2htmlEX', 'my.html', { timeLimit: 50 }, function(err, path) {

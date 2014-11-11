@@ -34,6 +34,32 @@ exports.convert = {
               });
     },
 
+    /**
+     * Time out
+     */
+    'Kill the pdf2htmlEX process if it executes longer than allowed': function(test) {
+        test.expect(1);
+        actionModule.actions.convert({ resource: 'convert',
+                                       execute: 'true',
+                                     },
+                                     { content: { raw: true, timeLimit: 5 },
+                                       file: {
+                                            path: '/tmp/pdf.pdf',
+                                            originalname: 'my.pdf',
+                                            type: 'application/pdf',
+                                            size: 19037,
+                                       },
+          }).
+        then(function(page) {
+            test.equal(page.error, 'Sorry, that file took too long to process');
+            test.done();
+          }).
+        catch(function(err) {
+            test.ok(false, err);
+            test.done();
+          });
+    },
+
     'Convert PDF to HTML and return raw data': function(test) {
         test.expect(3);
         actionModule.actions.convert({ resource: 'convert', execute: true },
