@@ -3,6 +3,7 @@ var doc = require('../lib'),
     fse = require('fs-extra'),
     nconf = require('nconf'),
     q = require('q'),
+    utils = require('gebo-utils'),
     winston = require('winston');
 
 module.exports = function() {
@@ -30,7 +31,7 @@ module.exports = function() {
           var destDir = './public/' + message.file.path.split('/').pop();
 
           // Respect the original file name
-          var filename = doc.getOutputFileName(message.file.originalname, 'html');
+          var filename = utils.getOutputFileName(message.file.originalname, 'html');
 
           doc.convert(message.file.path, destDir, filename, function(err, path) {
                 if (err) {
