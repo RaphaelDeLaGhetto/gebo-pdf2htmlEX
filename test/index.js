@@ -2,7 +2,8 @@
 
 var actionModule = require('..'),
     fse = require('fs-extra'),
-    nconf = require('nconf');
+    nconf = require('nconf'),
+    utils = require('gebo-utils');
 
 var DOMAIN = nconf.get('domain');
 
@@ -39,31 +40,34 @@ exports.convert = {
      */
     'Kill the pdf2htmlEX process if it executes longer than allowed': function(test) {
         test.expect(1);
-        actionModule.actions.convert({ resource: 'convert',
-                                       execute: 'true',
-                                     },
-                                     { content: { raw: true, timeLimit: 5 },
-                                       file: {
-                                            path: '/tmp/pdf.pdf',
-                                            originalname: 'my.pdf',
-                                            type: 'application/pdf',
-                                            size: 19037,
-                                       },
-          }).
-        then(function(page) {
-            test.equal(page.error, 'Sorry, that file took too long to process');
-            test.done();
-          }).
-        catch(function(err) {
-            test.ok(false, err);
-            test.done();
+        var messageContent = { raw: true, pidFile: 'file.pid', timeLimit: 1 };
+        utils.setTimeLimit(messageContent, function(timer) {
+            actionModule.actions.convert({ resource: 'convert',
+                                           execute: 'true',
+                                         },
+                                         { content: messageContent,
+                                           file: {
+                                                path: '/tmp/pdf.pdf',
+                                                originalname: 'my.pdf',
+                                                type: 'application/pdf',
+                                                size: 19037,
+                                           },
+              }).
+            then(function(page) {
+                test.equal(page.error, 'Sorry, that file took too long to process');
+                test.done();
+              }).
+            catch(function(err) {
+                test.ok(false, err);
+                test.done();
+              });
           });
     },
 
     'Convert PDF to HTML and return raw data': function(test) {
         test.expect(3);
         actionModule.actions.convert({ resource: 'convert', execute: true },
-                                     { content: { raw: true },
+                                     { content: { raw: true, pidFile: 'file.pid', },
                                        file: {
                                             path: '/tmp/pdf.pdf',
                                             originalname: 'my.pdf',
@@ -93,7 +97,8 @@ exports.convert = {
     'Convert PDF to HTML and return a link': function(test) {
         test.expect(2);
         actionModule.actions.convert({ resource: 'convert', execute: true },
-                                     { file: {
+                                     { content: { pidFile: 'file.pid', },
+                                       file: {
                                             path: '/tmp/pdf.pdf',
                                             originalname: 'my.pdf',
                                             type: 'application/pdf',
