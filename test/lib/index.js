@@ -108,11 +108,12 @@ exports.convert = {
 
     'Convert a PDF with spaces and brackets in the filename to HTML': function(test) {
         test.expect(2);
-        doc.convert('/tmp/My Inconveniently named PDF.pdf', '/tmp/gebo-pdf2htmlEX', 'My Inconveniently named PDF.html', { pidFile: '/tmp/file.pid' }, function(err, path) {
+        doc.convert('/tmp/My Inconveniently named PDF(1).pdf', '/tmp/gebo-pdf2htmlEX', 'My Inconveniently named PDF(1).html',
+                    { pidFile: '/tmp/file.pid' }, function(err, path) {
             if (err) {
               test.ok(false, err);
             }
-            test.equal(path, '/tmp/gebo-pdf2htmlEX/My Inconveniently named PDF.html');
+            test.equal(path, '/tmp/gebo-pdf2htmlEX/My Inconveniently named PDF(1).html');
             try {
               fse.closeSync(fse.openSync(path, 'r'));
               test.ok(true);
