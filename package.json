@@ -1,7 +1,7 @@
 {
   "name": "gebo-pdf2htmlex-action",
   "description": "A pdf2htmlEX-dependent PDF converter",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "homepage": "https://github.com/RaphaelDeLaGhetto/gebo-pdf2htmlex-action",
   "author": {
     "name": "RaphaelDeLaGhetto",
