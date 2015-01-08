@@ -1,6 +1,6 @@
 var doc = require('../lib'),
     exec = require('child_process').exec,
-    fse = require('fs-extra'),
+    fs = require('fs-extra'),
     nconf = require('nconf'),
     q = require('q'),
     utils = require('gebo-utils'),
@@ -40,7 +40,7 @@ module.exports = function() {
                 }
                 else {
                   if (message.content && message.content.raw) {
-                    fse.realpath(destDir, function(err, resolvedPath) {
+                    fs.realpath(destDir, function(err, resolvedPath) {
                         deferred.resolve({ filePath: resolvedPath + '/' + filename, fileName: filename });
                       });
                   }
