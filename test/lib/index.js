@@ -13,6 +13,7 @@ exports.convert = {
         fs.createReadStream('./test/docs/pdf.pdf').pipe(fs.createWriteStream('/tmp/pdf.pdf'));
         fs.createReadStream('./test/docs/pdf.pdf').pipe(fs.createWriteStream('/tmp/My Inconveniently named PDF.pdf'));
         fs.createReadStream('./test/docs/pdf.pdf').pipe(fs.createWriteStream('/tmp/My Inconveniently named PDF(1).pdf'));
+        fs.createReadStream('./test/docs/multipage.pdf').pipe(fs.createWriteStream('/tmp/multipage.pdf'));
         callback();
     },
 
@@ -20,6 +21,7 @@ exports.convert = {
         fs.unlinkSync('/tmp/pdf.pdf');
         fs.unlinkSync('/tmp/My Inconveniently named PDF.pdf');
         fs.unlinkSync('/tmp/My Inconveniently named PDF(1).pdf');
+        fs.unlinkSync('/tmp/multipage.pdf');
         fs.removeSync('/tmp/gebo-pdf2htmlEx');
         callback();
     },
@@ -125,24 +127,86 @@ exports.convert = {
           });
     },
 
+    /**
+     * First and last parameters set
+     *
+     * pdf2htmlEX takes care of out-of-range and negative values,
+     * so those are not explicitly tested
+     */
     'Convert a single page to HTML': function(test) {
-        console.log('TODO');
-        test.done();
+        test.expect(2);
+        doc.convert('/tmp/multipage.pdf', '/tmp/gebo-pdf2htmlEX', 'multipage.html',
+                    { pidFile: '/tmp/file.pid', first: 2, last: 2 }, function(err, path) {
+            if (err) {
+              test.ok(false, err);
+            }
+            test.equal(path, '/tmp/gebo-pdf2htmlEX/multipage.html');
+            try {
+              fs.closeSync(fs.openSync(path, 'r'));
+              test.ok(true);
+            }
+            catch (err) {
+              test.ok(false, err);
+            }
+            test.done();
+          });
     },
 
     'Convert a range of pages to HTML': function(test) {
-        console.log('TODO');
-        test.done();
+        test.expect(2);
+        doc.convert('/tmp/multipage.pdf', '/tmp/gebo-pdf2htmlEX', 'multipage.html',
+                    { pidFile: '/tmp/file.pid', first: 2, last: 4 }, function(err, path) {
+            if (err) {
+              test.ok(false, err);
+            }
+            test.equal(path, '/tmp/gebo-pdf2htmlEX/multipage.html');
+            try {
+              fs.closeSync(fs.openSync(path, 'r'));
+              test.ok(true);
+            }
+            catch (err) {
+              test.ok(false, err);
+            }
+            test.done();
+          });
     },
 
-    'Don\'t barf if the selected range is out of range': function(test) {
-        console.log('TODO');
-        test.done();
+    'Convert pages if only the first page is specified': function(test) {
+        test.expect(2);
+        doc.convert('/tmp/multipage.pdf', '/tmp/gebo-pdf2htmlEX', 'multipage.html',
+                    { pidFile: '/tmp/file.pid', first: 2 }, function(err, path) {
+            if (err) {
+              test.ok(false, err);
+            }
+            test.equal(path, '/tmp/gebo-pdf2htmlEX/multipage.html');
+            try {
+              fs.closeSync(fs.openSync(path, 'r'));
+              test.ok(true);
+            }
+            catch (err) {
+              test.ok(false, err);
+            }
+            test.done();
+          });
     },
 
-    'Don\'t barf if first page selected is negative': function(test) {
-        console.log('TODO');
-        test.done();
+    'Convert pages if only the last page is specified': function(test) {
+        test.expect(2);
+        doc.convert('/tmp/multipage.pdf', '/tmp/gebo-pdf2htmlEX', 'multipage.html',
+                    { pidFile: '/tmp/file.pid', last: 2 }, function(err, path) {
+            if (err) {
+              test.ok(false, err);
+            }
+            test.equal(path, '/tmp/gebo-pdf2htmlEX/multipage.html');
+            try {
+              fs.closeSync(fs.openSync(path, 'r'));
+              test.ok(true);
+            }
+            catch (err) {
+              test.ok(false, err);
+            }
+            test.done();
+          });
     },
 };
 
