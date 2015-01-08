@@ -1,7 +1,7 @@
 'use strict';
 
 var doc = require('../../lib'),
-    fse = require('fs-extra'),
+    fs = require('fs-extra'),
     utils = require('gebo-utils');
 
 /**
@@ -10,17 +10,17 @@ var doc = require('../../lib'),
 exports.convert = {
 
     setUp: function(callback) {
-        fse.createReadStream('./test/docs/pdf.pdf').pipe(fse.createWriteStream('/tmp/pdf.pdf'));
-        fse.createReadStream('./test/docs/pdf.pdf').pipe(fse.createWriteStream('/tmp/My Inconveniently named PDF.pdf'));
-        fse.createReadStream('./test/docs/pdf.pdf').pipe(fse.createWriteStream('/tmp/My Inconveniently named PDF(1).pdf'));
+        fs.createReadStream('./test/docs/pdf.pdf').pipe(fs.createWriteStream('/tmp/pdf.pdf'));
+        fs.createReadStream('./test/docs/pdf.pdf').pipe(fs.createWriteStream('/tmp/My Inconveniently named PDF.pdf'));
+        fs.createReadStream('./test/docs/pdf.pdf').pipe(fs.createWriteStream('/tmp/My Inconveniently named PDF(1).pdf'));
         callback();
     },
 
     tearDown: function(callback) {
-        fse.unlinkSync('/tmp/pdf.pdf');
-        fse.unlinkSync('/tmp/My Inconveniently named PDF.pdf');
-        fse.unlinkSync('/tmp/My Inconveniently named PDF(1).pdf');
-        fse.removeSync('/tmp/gebo-pdf2htmlEx');
+        fs.unlinkSync('/tmp/pdf.pdf');
+        fs.unlinkSync('/tmp/My Inconveniently named PDF.pdf');
+        fs.unlinkSync('/tmp/My Inconveniently named PDF(1).pdf');
+        fs.removeSync('/tmp/gebo-pdf2htmlEx');
         callback();
     },
 
@@ -34,7 +34,7 @@ exports.convert = {
               test.ok(false, err);
             }
             try {
-              fse.openSync('/tmp/file.pid', 'r');
+              fs.openSync('/tmp/file.pid', 'r');
               test.ok(true);
             }
             catch(err) {
@@ -78,7 +78,7 @@ exports.convert = {
             }
             test.equal(path, '/tmp/gebo-pdf2htmlEX/my.html');
             try {
-              fse.closeSync(fse.openSync(path, 'r'));
+              fs.closeSync(fs.openSync(path, 'r'));
               test.ok(true);
             }
             catch (err) {
@@ -96,7 +96,7 @@ exports.convert = {
             }
             test.equal(path, '/tmp/gebo-pdf2htmlEX/My Inconveniently named PDF.html');
             try {
-              fse.closeSync(fse.openSync(path, 'r'));
+              fs.closeSync(fs.openSync(path, 'r'));
               test.ok(true);
             }
             catch (err) {
@@ -115,7 +115,7 @@ exports.convert = {
             }
             test.equal(path, '/tmp/gebo-pdf2htmlEX/My Inconveniently named PDF(1).html');
             try {
-              fse.closeSync(fse.openSync(path, 'r'));
+              fs.closeSync(fs.openSync(path, 'r'));
               test.ok(true);
             }
             catch (err) {
@@ -123,6 +123,26 @@ exports.convert = {
             }
             test.done();
           });
+    },
+
+    'Convert a single page to HTML': function(test) {
+        console.log('TODO');
+        test.done();
+    },
+
+    'Convert a range of pages to HTML': function(test) {
+        console.log('TODO');
+        test.done();
+    },
+
+    'Don\'t barf if the selected range is out of range': function(test) {
+        console.log('TODO');
+        test.done();
+    },
+
+    'Don\'t barf if first page selected is negative': function(test) {
+        console.log('TODO');
+        test.done();
     },
 };
 
